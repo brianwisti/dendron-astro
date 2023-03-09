@@ -1,22 +1,12 @@
 ---
-import { getRecentUpdates } from '../lib/DendronCache'
 import Layout from '../layouts/Layout.astro'
-import NoteLink from '../components/NoteLink.astro'
-import Timestamp from '../components/Timestamp.astro';
-const recentUpdates = getRecentUpdates().slice(0, 4);
+import RecentEdits from '../components/RecentEdits.astro'
+import * as rootNote from '../../../notes/root.md'
+
 ---
 
-<Layout title="Please Hold">
-	<main>
-		<h1>Please Hold</h1>
-		<h2>Recent Edits</h2>
-		<ul>
-			{recentUpdates.map((note) =>
-				<li>
-					<Timestamp epoch={note.data.updated} />:
-					<NoteLink to={note.data.fname} />
-				</li>
-			)}
-		</ul>
-	</main>
+<Layout title={rootNote.frontmatter.title}>
+	<h1>{rootNote.frontmatter.title}</h1>
+	<RecentEdits />
+	<rootNote.Content />
 </Layout>
