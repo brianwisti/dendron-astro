@@ -11,9 +11,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@dendronhq/common-all": "^0.119.0",
     "@mojojs/path": "^1.5.4",
     "astro": "^2.0.18",
-    "dotenv": "^16.0.3",
     "remark-wiki-link": "^1.0.4",
     "yaml": "^2.2.1"
   }
