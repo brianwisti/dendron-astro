@@ -1,0 +1,8 @@
+---
+import Timestamp from "./Timestamp.astro";
+const { created, updated } = Astro.props
+---
+<div class="meta">
+    Last Edited <Timestamp epoch={updated} />
+    (Added <Timestamp epoch={created} />)
+</div>
