@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro'
 import NoteLink from '../../components/NoteLink.astro'
 
 export async function getStaticPaths() {
-    const notes = await Astro.glob("C:\\Users\\brian\\moa-dendron\\notes\\*.md")
+    const notes = await Astro.glob("../../../../notes/*.md")
 
     return notes.map(note => {
         const parent = "root"
