@@ -1,5 +1,5 @@
 ---
-import { getNoteHref, loadDendronCache } from '../lib/DendronCache'
+import { getNoteHref, getNoteTitle } from '../lib/DendronCache'
 
 export interface Props {
     to: string;
@@ -7,5 +7,6 @@ export interface Props {
 
 const { to } = Astro.props
 const linkTo = getNoteHref(to)
+const title = getNoteTitle(to)
 ---
-<a href={linkTo}>{to}</a>
+<a class="internal" href={linkTo}>{to}</a>

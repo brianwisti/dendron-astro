@@ -31,7 +31,12 @@ export function getNoteHref(fname: string) {
   return `/notes/${noteId}`;
 }
 
-export function getRecentUpdates(limit: number = 5) {
+export function getNoteTitle(fname: string) {
+  const note = getNoteCache(fname);
+  return note.data.title;
+}
+
+export function getRecentUpdates() {
   const notes = Object.values(DENDRON_CACHE.notes) as Array<NotesCacheEntry>;
   return notes.sort((a, b) => {
     return b.data.updated - a.data.updated;
