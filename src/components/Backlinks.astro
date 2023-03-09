@@ -1,0 +1,22 @@
+---
+import { getLinksToNote } from "../lib/DendronCache"
+import NoteLink from "./NoteLink.astro"
+
+const { fname } = Astro.props
+const backlinks = getLinksToNote(fname)
+---
+{backlinks.length > 0 ?
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Links from other notes</h4>
+            <ul class="card-text">
+                {backlinks.map((note) =>
+                    <li>
+                        <NoteLink to={note.data.fname} />
+                    </li>
+                )}
+            </ul>
+        </div>
+    </div>
+    : ""
+}

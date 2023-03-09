@@ -2,6 +2,13 @@ import Path from "@mojojs/path";
 import type { NotesCacheEntry } from "@dendronhq/common-all";
 import * as DENDRON_CACHE from "../notes/.dendron.cache.json";
 
+export function getLinksToNote(fname: string): Array<NotesCacheEntry> {
+  const notes = Object.values(DENDRON_CACHE.notes) as Array<NotesCacheEntry>;
+  return notes.filter((note) =>
+    note.data.links.some((link) => link.to?.fname == fname)
+  );
+}
+
 export function getNoteCache(fname: string): NotesCacheEntry {
   const noteName = new Path(fname).toObject().name;
   if (!Object.hasOwn(DENDRON_CACHE.notes, noteName)) {
