@@ -1,0 +1,9 @@
+---
+import { DateTime } from "luxon"
+
+const { epoch } = Astro.props
+const time = DateTime.fromMillis(epoch)
+const tsISO = time.toISO();
+const dateISO = time.toISODate();
+---
+<time datetime={tsISO}>{dateISO}</time>

@@ -13,7 +13,9 @@
   "dependencies": {
     "@dendronhq/common-all": "^0.119.0",
     "@mojojs/path": "^1.5.4",
+    "@types/luxon": "^3.2.0",
     "astro": "^2.0.18",
+    "luxon": "^3.3.0",
     "remark-wiki-link": "^1.0.4",
     "yaml": "^2.2.1"
   }

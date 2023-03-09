@@ -1,0 +1,21 @@
+---
+import NoteLink from "../components/NoteLink.astro";
+---
+<nav class="fixed split-nav">
+    <div class="nav-brand">
+        <h4><a href="/" class="logo">My Random Brain</a></h4>
+    </div>
+    <div class="collapsible">
+        <input id="top-branches" type="checkbox" name="top-branches">
+        <label for="top-branches">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </label>
+        <div class="collapsible-body">
+            <ul class="inline">
+                <li><NoteLink to="root" /></li>
+            </ul>
+        </div>
+    </div>
+</nav>

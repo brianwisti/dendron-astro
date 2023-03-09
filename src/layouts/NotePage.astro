@@ -1,0 +1,38 @@
+---
+import Layout from './Layout.astro'
+import NoteLink from '../components/NoteLink.astro'
+import Timestamp from '../components/Timestamp.astro'
+import NoteDateInfo from '../components/NoteDateInfo.astro'
+import { getNoteCache } from '../lib/DendronCache'
+
+const { note } = Astro.props
+const noteCache = getNoteCache(note.file)
+console.log(noteCache)
+const { parent } = noteCache.data
+---
+<Layout title={note.frontmatter.title}>
+    <article>
+        <header>
+            <h1>{note.frontmatter.title}</h1>
+            <footer>
+                <NoteDateInfo
+                    created={note.frontmatter.created}
+                    updated={note.frontmatter.updated} />
+                <dl>
+                    <dt>Parent</dt>
+                    <dd>{parent ? <NoteLink to={parent} /> : "None"}</dd>
+                </dl>
+            </footer>
+        </header>
+        <note.Content />
+        <footer>
+            <NoteDateInfo created={note.frontmatter.created} updated={note.frontmatter.updated} />
+        </footer>
+    </article>
+</Layout>
+
+<style>
+    article {
+        padding: 1em;
+    }
+</style>
