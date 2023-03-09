@@ -1,36 +1,23 @@
 ---
-import Path from "@mojojs/path"
-import * as dotenv from "dotenv"
-
 import { Debug } from 'astro/components'
 import Layout from '../../layouts/Layout.astro'
 import NoteLink from '../../components/NoteLink.astro'
 
-dotenv.config();
-if (process.env["DENDRON_WORKSPACE"] === undefined) {
-    throw "DENDRON_WORKSPACE is undefined";
-}
-
-/// Translate the Dendron cache to a collection of routes.
 export async function getStaticPaths() {
     const notes = await Astro.glob("C:\\Users\\brian\\moa-dendron\\notes\\*.md")
 
     return notes.map(note => {
-        const parent = "root";
-        console.log(note);
-        console.log(note.file)
-        const fname = new Path(note.file).toObject().name;
-        console.log(fname);
-    
+        const parent = "root"
+
         return {
-            params: { fname },
+            params: { id: note.frontmatter.id },
             props: { note, parent },
-        };
+        }
     })
 }
 
-const { fname } = Astro.params;
-const { note, parent } = Astro.props;
+const { id } = Astro.params
+const { note, parent } = Astro.props
 ---
 <Layout title={note.frontmatter.title}>
     <h1>{note.frontmatter.title}</h1>

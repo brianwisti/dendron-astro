@@ -1,9 +1,11 @@
 ---
+import { getNoteHref, loadDendronCache } from '../lib/DendronCache'
+
 export interface Props {
     to: string;
 }
 
-const { to } = Astro.props;
-const linkTo = `/notes/${to}`;
+const { to } = Astro.props
+const linkTo = getNoteHref(to)
 ---
 <a href={linkTo}>{to}</a>
