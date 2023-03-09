@@ -1,18 +1,11 @@
 ---
-import { loadDendronCache } from '../lib/DendronCache'
+import { getNoteHref, loadDendronCache } from '../lib/DendronCache'
 
 export interface Props {
     to: string;
 }
 
 const { to } = Astro.props
-const dendronCache = await loadDendronCache()
-
-if (!Object.hasOwn(dendronCache.notes, to)) {
-    throw `${to} not in vault cache!`
-}
-
-const target = dendronCache.notes[to]
-const linkTo = `/notes/${target.data.id}`
+const linkTo = getNoteHref(to)
 ---
 <a href={linkTo}>{to}</a>
