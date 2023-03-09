@@ -19,3 +19,10 @@ export function getNoteHref(fname: string) {
   const noteId = DENDRON_CACHE.notes[fname].data.id;
   return `/notes/${noteId}`;
 }
+
+export function getRecentUpdates(limit: number = 5) {
+  const notes = Object.values(DENDRON_CACHE.notes) as Array<NotesCacheEntry>;
+  return notes.sort((a, b) => {
+    return b.data.updated - a.data.updated;
+  });
+}
