@@ -36,6 +36,10 @@ const { title } = Astro.props;
 		background-image: none;
 	}
 
+	a[href].internal.new {
+		color: rgba(0 0 0 / .5);
+	}
+
 	a[href].internal::before {
 		content: "« ";
 	}

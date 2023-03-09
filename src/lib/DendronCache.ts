@@ -18,13 +18,17 @@ export function getNoteCache(fname: string): NotesCacheEntry {
   return DENDRON_CACHE.notes[noteName];
 }
 
+export function getNoteFnames(): Array<string> {
+  return Object.keys(DENDRON_CACHE.notes);
+}
+
 export function getNoteHref(fname: string) {
   if (fname == "root") {
     return "/";
   }
 
   if (!Object.hasOwn(DENDRON_CACHE.notes, fname)) {
-    return "#";
+    return "/missing";
   }
 
   const noteId = DENDRON_CACHE.notes[fname].data.id;
