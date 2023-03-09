@@ -1,0 +1,9 @@
+---
+export interface Props {
+    to: string;
+}
+
+const { to } = Astro.props;
+const linkTo = `/notes/${to}`;
+---
+<a href={linkTo}>{to}</a>
