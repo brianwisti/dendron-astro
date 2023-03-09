@@ -12,6 +12,10 @@ export function getNoteCache(fname: string): NotesCacheEntry {
 }
 
 export function getNoteHref(fname: string) {
+  if (fname == "root") {
+    return "/";
+  }
+
   if (!Object.hasOwn(DENDRON_CACHE.notes, fname)) {
     return "#";
   }
