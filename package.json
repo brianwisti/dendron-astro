@@ -3,7 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro check --watch & astro dev",
+    "check": "astro check",
+    "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -11,6 +12,9 @@
   },
   "dependencies": {
     "@mojojs/path": "^1.5.4",
-    "astro": "^2.0.18"
+    "astro": "^2.0.18",
+    "dotenv": "^16.0.3",
+    "remark-wiki-link": "^1.0.4",
+    "yaml": "^2.2.1"
   }
 }

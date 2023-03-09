@@ -1,48 +1,47 @@
 ---
-import Path from '@mojojs/path';
-import { Debug } from 'astro/components';
-import Layout from '../../layouts/Layout.astro';
-import NoteLink from '../../components/NoteLink.astro';
+import Path from "@mojojs/path"
+import * as dotenv from "dotenv"
 
+import { Debug } from 'astro/components'
+import Layout from '../../layouts/Layout.astro'
+import NoteLink from '../../components/NoteLink.astro'
+
+dotenv.config();
+if (process.env["DENDRON_WORKSPACE"] === undefined) {
+    throw "DENDRON_WORKSPACE is undefined";
+}
 
 /// Translate the Dendron cache to a collection of routes.
 export async function getStaticPaths() {
-    const cacheFile = "../notes/.dendron.cache.json";
-    const file = new Path(cacheFile);
-    const cacheSource = await file.readFile('utf8');
-    const notes = JSON.parse(cacheSource.toString()).notes;
+    const notes = await Astro.glob("C:\\Users\\brian\\moa-dendron\\notes\\*.md")
 
-    // Establish parents
-
-    return Object.entries(notes).map(([fname, note]) => {
-        const notePath = new Path(`../notes/${fname}.md`);
-        note.data.parent = (fname == "root")
-            ? null
-            : "root";
-
+    return notes.map(note => {
+        const parent = "root";
+        console.log(note);
+        console.log(note.file)
+        const fname = new Path(note.file).toObject().name;
+        console.log(fname);
+    
         return {
-            params: { fname: fname },
-            props: {note, path: notePath },
+            params: { fname },
+            props: { note, parent },
         };
-    });
+    })
 }
 
 const { fname } = Astro.params;
-const { note } = Astro.props;
+const { note, parent } = Astro.props;
 ---
-<Layout title={note.data.title}>
-    <h1>{note.data.title}</h1>
+<Layout title={note.frontmatter.title}>
+    <h1>{note.frontmatter.title}</h1>
     <dl>
         <dt>Parent</dt>
-        <dd>{note.data.parent ? <NoteLink to={note.data.parent} /> : "None"}</dd>
+        <dd>{parent ? <NoteLink to={parent} /> : "None"}</dd>
         <dt>Created</dt>
-        <dd>{note.data.created}</dd>
+        <dd>{note.frontmatter.created}</dd>
         <dt>Updated</dt>
-        <dd>{note.data.updated}</dd>
+        <dd>{note.frontmatter.updated}</dd>
     </dl>
-    <h2>Links</h2>
-    <ul>
-        {note.data.links.map((link) => <li><a href=`/notes/${link.to.fname}`>{link.to.fname}</a></li>)}
-    </ul>
-    <Debug {note.data} />
+    <Debug {note.frontmatter} />
+    <note.Content />
 </Layout>

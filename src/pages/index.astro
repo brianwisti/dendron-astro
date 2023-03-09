@@ -1,13 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import * as pubRoot from '../notes/pub-root.md';
 ---
 
-<Layout title={pubRoot.frontmatter.title}>
+<Layout title="Please Hold">
 	<main>
-		<h1>{pubRoot.frontmatter.title}</h1>
-		<pubRoot.Content />
+		<h1>Please Hold</h1>
 		<ul role="list" class="link-card-grid">
 			<Card
 				href="/notes/root"
